@@ -73,7 +73,8 @@ const jtrello = (function() {
 
   //Metod för att flytta ett kort till en annan lista
    function moveCard() {
-    DOM.$listCards.sortable();
+    DOM.$listCards.sortable({
+      connectWith: DOM.$listCards});
   } 
   
   // Metod för att rita ut element i DOM:en

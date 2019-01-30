@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-// require('webpack-jquery-ui');
+require('webpack-jquery-ui');
 import '../css/styles.css';
 
 /**
@@ -22,7 +22,9 @@ const jtrello = (function() {
     DOM.$listDialog = $('#list-creation-dialog');
     DOM.$columns = $('.column');
     DOM.$lists = $('.list');
+    DOM.$listCards = $('.list-cards');
     DOM.$cards = $('.card');
+
     
     DOM.$newListButton = $('button#new-list');
     DOM.$deleteListButton = $('.list-header > button.delete');
@@ -47,6 +49,7 @@ const jtrello = (function() {
   }
 
   /* ============== Metoder för att hantera listor nedan ============== */
+ 
   function createList() {
     event.preventDefault();
     console.log("This should create a new list");
@@ -64,6 +67,14 @@ const jtrello = (function() {
 
   function deleteCard() {
     console.log("This should delete the card you clicked on");
+   // DOM.$cards.remove();
+   $(this).closest().remove();
+  }
+
+  //Metod för att flytta ett kort till en annan lista
+   function moveCard() {
+    DOM.$listCards.sortable();
+    DOM.$listCards.disableSelection();
   }
 
   // Metod för att rita ut element i DOM:en
@@ -78,17 +89,24 @@ const jtrello = (function() {
     captureDOMEls();
     createTabs();
     createDialogs();
-
     bindEvents();
   }
 
   // All kod här
   return {
-    init: init
+    init: init,
+    create_c: createCard,
+    delete_c: deleteCard,
+    move_c: moveCard
   };
+
 })();
 
 //usage
 $("document").ready(function() {
   jtrello.init();
 });
+
+/* $( ".list" ).draggable(
+  drag: function( event, ui ) {} );
+$( ".list" ).droppable({});  */

@@ -68,15 +68,14 @@ const jtrello = (function() {
   function deleteCard() {
     console.log("This should delete the card you clicked on");
    // DOM.$cards.remove();
-   $(this).closest().remove();
+   $(this).parent().remove();
   }
 
   //Metod för att flytta ett kort till en annan lista
    function moveCard() {
     DOM.$listCards.sortable();
-    DOM.$listCards.disableSelection();
-  }
-
+  } 
+  
   // Metod för att rita ut element i DOM:en
   function render() {}
 
@@ -90,14 +89,12 @@ const jtrello = (function() {
     createTabs();
     createDialogs();
     bindEvents();
+    moveCard();
   }
 
   // All kod här
   return {
     init: init,
-    create_c: createCard,
-    delete_c: deleteCard,
-    move_c: moveCard
   };
 
 })();
@@ -106,7 +103,3 @@ const jtrello = (function() {
 $("document").ready(function() {
   jtrello.init();
 });
-
-/* $( ".list" ).draggable(
-  drag: function( event, ui ) {} );
-$( ".list" ).droppable({});  */

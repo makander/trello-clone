@@ -1,7 +1,8 @@
-import $ from 'jquery';
+import $ from "jquery";
 
-require('webpack-jquery-ui');
-import '../css/styles.css';
+require("webpack-jquery-ui");
+import "../css/styles.css";
+import { Domain } from "domain";
 
 /**
  * jtrello
@@ -18,38 +19,38 @@ const jtrello = (function() {
 
   /* =================== Privata metoder nedan ================= */
   function captureDOMEls() {
-    DOM.$board = $('.board');
-    DOM.$listDialog = $('#list-creation-dialog');
-    DOM.$columns = $('.column');
-    DOM.$lists = $('.list');
-    DOM.$listCards = $('.list-cards');
-    DOM.$cards = $('.card');
+    DOM.$board = $(".board");
+    DOM.$listDialog = $("#list-creation-dialog");
+    DOM.$columns = $(".column");
+    DOM.$lists = $(".list");
+    DOM.$listCards = $(".list-cards");
+    DOM.$cards = $(".card");
+    DOM.$listHeader = $(".list-header");
 
-    
-    DOM.$newListButton = $('button#new-list');
-    DOM.$deleteListButton = $('.list-header > button.delete');
+    DOM.$newListButton = $("button#new-list");
+    DOM.$deleteListButton = $(".list-header > button.delete");
 
-    DOM.$newCardForm = $('form.new-card');
-    DOM.$deleteCardButton = $('.card > button.delete');
+    DOM.$newCardForm = $("form.new-card");
+    DOM.$deleteCardButton = $(".card > button.delete");
   }
 
   function createTabs() {}
   function createDialogs() {}
 
   /*
-  *  Denna metod kommer nyttja variabeln DOM för att binda eventlyssnare till
-  *  createList, deleteList, createCard och deleteCard etc.
-  */
+   *  Denna metod kommer nyttja variabeln DOM för att binda eventlyssnare till
+   *  createList, deleteList, createCard och deleteCard etc.
+   */
   function bindEvents() {
-    DOM.$newListButton.on('click', createList);
-    DOM.$deleteListButton.on('click', deleteList);
+    DOM.$newListButton.on("click", createList);
+    DOM.$deleteListButton.on("click", deleteList);
 
-    DOM.$newCardForm.on('submit', createCard);
-    DOM.$deleteCardButton.on('click', deleteCard);
+    DOM.$newCardForm.on("submit", createCard);
+    DOM.$deleteCardButton.on("click", deleteCard);
   }
 
   /* ============== Metoder för att hantera listor nedan ============== */
- 
+
   function createList() {
     event.preventDefault();
     console.log("This should create a new list");
@@ -57,6 +58,11 @@ const jtrello = (function() {
 
   function deleteList() {
     console.log("This should delete the list you clicked on");
+    $(this)
+      .parent()
+      .parent()
+      .parent()
+      .remove();
   }
 
   /* =========== Metoder för att hantera kort i listor nedan =========== */
@@ -67,16 +73,24 @@ const jtrello = (function() {
 
   function deleteCard() {
     console.log("This should delete the card you clicked on");
-   // DOM.$cards.remove();
-   $(this).parent().remove();
+    // DOM.$cards.remove();
+    $(this)
+      .parent()
+      .remove();
   }
 
   //Metod för att flytta ett kort till en annan lista
-   function moveCard() {
+  function moveCard() {
     DOM.$listCards.sortable({
-      connectWith: DOM.$listCards});
-  } 
-  
+      connectWith: DOM.$listCards
+    });
+  }
+
+  function moveColumns() {
+    DOM.$columns.sortable({
+      connectWith: DOM.$columns
+    });
+  }
   // Metod för att rita ut element i DOM:en
   function render() {}
 
@@ -84,20 +98,20 @@ const jtrello = (function() {
 
   // Init metod som körs först
   function init() {
-    console.log(':::: Initializing JTrello ::::');
+    console.log(":::: Initializing JTrello ::::");
     // Förslag på privata metoder
     captureDOMEls();
     createTabs();
     createDialogs();
     bindEvents();
     moveCard();
+    moveColumns();
   }
 
   // All kod här
   return {
-    init: init,
+    init: init
   };
-
 })();
 
 //usage

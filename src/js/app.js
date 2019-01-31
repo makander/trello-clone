@@ -58,10 +58,7 @@ const jtrello = (function() {
 
   function deleteList() {
     console.log("This should delete the list you clicked on");
-    $(this)
-      .parent()
-      .parent()
-      .parent()
+    $(this).closest(DOM.$columns)
       .remove();
   }
 

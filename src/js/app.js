@@ -26,11 +26,12 @@ const jtrello = (function() {
     DOM.$listCards = $(".list-cards");
     DOM.$cards = $(".card");
     DOM.$listHeader = $(".list-header");
+    
 
     DOM.$newListButton = $("button#new-list");
     DOM.$deleteListButton = $(".list-header > button.delete");
 
-    DOM.$newCardForm = $("form.new-card");
+    DOM.$newCardForm = $("form.new-card")
     DOM.$deleteCardButton = $(".card > button.delete");
   }
 
@@ -52,14 +53,25 @@ const jtrello = (function() {
   /* ============== Metoder för att hantera listor nedan ============== */
 
   function createList() {
-    event.preventDefault();
-    console.log("This should create a new list");
-  }
+    DOM.$listDialog.dialog({
+      modal: true,
+      'buttons': {
+        'Create': function(event) {
+         //   $(event.target).DOM.$Board.append(' <div class="column"><div class="list"><div class="list-header">Doing</div><ul class="list-cards"><li class="add-new"><form class="new-card" action="index.html"><input type="text" name="title" placeholder="Please name the card" /><button class="button add">Add new card</button></form></li></ul></div>');}
+    }
+ });
+}
 
   function deleteList() {
     console.log("This should delete the list you clicked on");
     $(this).closest(DOM.$columns)
       .remove();
+  }
+
+  function moveColumns() {
+    DOM.$columns.sortable({
+      connectWith: DOM.$columns
+    });
   }
 
   /* =========== Metoder för att hantera kort i listor nedan =========== */
@@ -79,15 +91,12 @@ const jtrello = (function() {
   //Metod för att flytta ett kort till en annan lista
   function moveCard() {
     DOM.$listCards.sortable({
-      connectWith: DOM.$listCards
+      connectWith: DOM.$listCards,
+      cancel: ".column-unsortable",
+      cancel: ".add-new"
     });
   }
 
-  function moveColumns() {
-    DOM.$columns.sortable({
-      connectWith: DOM.$columns
-    });
-  }
   // Metod för att rita ut element i DOM:en
   function render() {}
 

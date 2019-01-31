@@ -46,7 +46,7 @@ input {
     height: 100vh;
 }
 
-.column {
+.column, .column-unsortable {
   width: 270px;
   margin: 0 5px;
   height: 100%;
@@ -141,7 +141,11 @@ input {
   margin-bottom: 10px;
 }
 
-.ui-dialog .ui-dialog-titlebar-close {
+/* .ui-dialog .ui-dialog-titlebar-close {
+  display: none;
+} */
+
+#list-creation-dialog {
   display: none;
 }
 

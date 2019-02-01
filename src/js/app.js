@@ -34,7 +34,9 @@ const jtrello = (function($) {
     DOM.$deleteCardButton = $(".card > button.delete");
   }
 
-  function createTabs() {}
+  function createTabs() {
+    $("#tabs").tabs();
+  }
 
   function createDialogs() {
     DOM.$listDialog.dialog({
@@ -54,12 +56,16 @@ const jtrello = (function($) {
     DOM.$newCardForm.on("submit", createCard);
     DOM.$deleteCardButton.on("click", deleteCard);
 
-    $("#list-creation-dialog > form").on("submit", createList);
+    $("#tabs").on("submit", createList);
   }
 
   /* ============== Metoder för att hantera listor nedan ============== */
   function toggleListCreationDialog() {
     $("#list-creation-dialog").dialog("open");
+  }
+
+  function datePicker() {
+    $("#datepicker").datepicker();
   }
 
   function createList(event) {
@@ -69,10 +75,10 @@ const jtrello = (function($) {
       .val();
 
     let newListDueDate = $(this)
-      .find("input[name='datepicker']")
+      .find("input#datepicker")
       .val();
 
-    $(".column-unsortable").before(`
+    $(".column:last").after(`
     <div class="column">
             <div class="list">
                 <div class="list-header">
@@ -113,7 +119,6 @@ const jtrello = (function($) {
 
   function deleteCard() {
     console.log("This should delete the card you clicked on");
-    // DOM.$cards.remove();
     $(this)
       .parent()
       .remove();
@@ -143,6 +148,8 @@ const jtrello = (function($) {
     bindEvents();
     moveCard();
     moveColumns();
+    createTabs();
+    datePicker();
   }
 
   // All kod här

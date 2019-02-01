@@ -52,13 +52,10 @@ const jtrello = (function($) {
   function bindEvents() {
     DOM.$board.on("click", ".list-header > button.delete", deleteList);
     DOM.$board.on("click", "button#new-list", toggleListCreationDialog);
-    // DOM.$newListButton.on("click", toggleListCreationDialog)
-
-    // DOM.$newListButton.on("click", toggleListCreationDialog);
     DOM.$board.on("click", ".list-header > button.delete", deleteList);
-    // DOM.$deleteListButton.on("click", deleteList);
 
-    DOM.$newCardForm.on("submit", createCard);
+    DOM.$board.on("submit", "form.new-card", createCard);
+    // DOM.$newCardForm.on("submit", createCard);
     DOM.$deleteCardButton.on("click", deleteCard);
     $("#tabs").on("submit", createList);
   }
@@ -141,7 +138,9 @@ const jtrello = (function($) {
     console.log("This should delete the card you clicked on");
     $(this)
       .offsetParent()
-      .remove();
+      .fadeOut(1200, function() {
+        $(this).remove();
+      });
   }
 
   //Metod för att flytta ett kort till en annan lista

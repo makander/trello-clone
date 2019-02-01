@@ -65,7 +65,11 @@ const jtrello = (function($) {
 
   /* ============== Metoder för att hantera listor nedan ============== */
   function toggleListCreationDialog() {
-    $("#list-creation-dialog").dialog("open");
+    if (!$("#list-creation-dialog").dialog("isOpen")) {
+      $("#list-creation-dialog").dialog("open");
+    } else {
+      $("#list-creation-dialog").dialog("close");
+    }
   }
 
   function datePicker() {

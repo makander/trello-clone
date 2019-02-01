@@ -40,7 +40,7 @@ const jtrello = (function($) {
 
   function createDialogs() {
     DOM.$listDialog.dialog({
-      modal: true,
+      // modal: true,
       autoOpen: false
     });
   }
@@ -50,12 +50,16 @@ const jtrello = (function($) {
    *  createList, deleteList, createCard och deleteCard etc.
    */
   function bindEvents() {
-    DOM.$newListButton.on("click", toggleListCreationDialog);
-    DOM.$deleteListButton.on("click", deleteList);
+    DOM.$board.on("click", ".list-header > button.delete", deleteList);
+    DOM.$board.on("click", "button#new-list", toggleListCreationDialog);
+    // DOM.$newListButton.on("click", toggleListCreationDialog)
+
+    // DOM.$newListButton.on("click", toggleListCreationDialog);
+    DOM.$board.on("click", ".list-header > button.delete", deleteList);
+    // DOM.$deleteListButton.on("click", deleteList);
 
     DOM.$newCardForm.on("submit", createCard);
     DOM.$deleteCardButton.on("click", deleteCard);
-
     $("#tabs").on("submit", createList);
   }
 
@@ -78,7 +82,7 @@ const jtrello = (function($) {
       .find("input#datepicker")
       .val();
 
-    $(".column:last").after(`
+    $(".column-unsortable").before(`
     <div class="column">
             <div class="list">
                 <div class="list-header">
@@ -96,12 +100,15 @@ const jtrello = (function($) {
             </div>
         </div>
     `);
+    toggleListCreationDialog("close");
   }
 
   function deleteList() {
     console.log("This should delete the list you clicked on");
+
     $(this)
-      .closest(DOM.$columns)
+      .offsetParent()
+      .parent()
       .remove();
   }
 
@@ -115,12 +122,21 @@ const jtrello = (function($) {
   function createCard(event) {
     event.preventDefault();
     console.log("This should create a new card");
+    let newCardTitle = $(this)
+      .find("input")
+      .val();
+
+    $(this).closest(".add-new").before(`<li class="card"> 
+    ${newCardTitle} <button class="button delete">X</button>
+  </li>`);
+    moveCard();
+    $(".delete").click(deleteCard);
   }
 
   function deleteCard() {
     console.log("This should delete the card you clicked on");
     $(this)
-      .parent()
+      .offsetParent()
       .remove();
   }
 
@@ -148,7 +164,6 @@ const jtrello = (function($) {
     bindEvents();
     moveCard();
     moveColumns();
-    createTabs();
     datePicker();
   }
 

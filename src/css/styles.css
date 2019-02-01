@@ -16,14 +16,14 @@ a:hover {
 }
 
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 ul li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 input {
@@ -43,10 +43,11 @@ input {
 }
 
 .board {
-    height: 100vh;
+  height: 100vh;
 }
 
-.column, .column-unsortable {
+.column,
+.column-unsortable {
   width: 270px;
   margin: 0 5px;
   height: 100%;
@@ -141,9 +142,9 @@ input {
   margin-bottom: 10px;
 }
 
-/* .ui-dialog .ui-dialog-titlebar-close {
+.ui-dialog .ui-dialog-titlebar-close {
   display: none;
-} */
+}
 
 #list-creation-dialog {
   display: none;

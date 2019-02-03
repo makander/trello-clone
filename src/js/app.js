@@ -3,6 +3,8 @@ import $ from "jquery";
 require("webpack-jquery-ui");
 import "../css/styles.css";
 import { Domain } from "domain";
+import 'jquery-ui/themes/base/all.css';
+
 
 /**
  * jtrello
@@ -57,9 +59,12 @@ const jtrello = (function($) {
     DOM.$board.on("click", ".list-header > button.delete", deleteList);
     DOM.$board.on("click", "button#new-list", toggleListCreationDialog);
     DOM.$board.on("click", ".list-header > button.delete", deleteList);
+    
+    $("#peachy").click(function(){
+      $('.board').peacher();
+    })
 
     DOM.$board.on("submit", "form.new-card", createCard);
-    // DOM.$newCardForm.on("submit", createCard);
     DOM.$deleteCardButton.on("click", deleteCard);
     $("#tabs").on("submit", createList);
   }
@@ -119,7 +124,7 @@ const jtrello = (function($) {
 
   function moveColumns() {
     DOM.$columns.sortable({
-      connectWith: DOM.$columns
+     connectWith: DOM.$columns
     });
   }
 
@@ -156,7 +161,44 @@ const jtrello = (function($) {
     });
   }
 
- 
+;(function($, window, document, undefined) {
+
+	var pluginName = "peacher",
+  defaults = {
+  	className: 'peachy'  
+  };
+
+  function Plugin(element, options) {
+  	this.element = element;
+    
+    this.options = $.extend({}, defaults, options);
+    
+    this._default = defaults;
+    this._name = pluginName;
+    
+    this.init(); 
+  }
+  
+  Plugin.prototype = {
+  	init: function() {
+	    this.peacherFunction(this.element, this.options);
+    },
+    peacherFunction: function(el, options) {
+      $(el)
+        .addClass(options.className).parents()
+        .css("background-image", "linear-gradient(to right, peachpuff , pink")
+    }
+  };
+  
+  $.fn[pluginName] = function(options) {
+  	return this.each(function() {
+    	if (!$.data(this, "plugin_" + pluginName)) {
+      	$.data(this, "plugin_" + pluginName, new Plugin(this, options));
+      }
+    })
+  };
+  
+})(jQuery, window, document);
 
   // Metod för att rita ut element i DOM:en
   function render() {}

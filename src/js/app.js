@@ -40,8 +40,12 @@ const jtrello = (function($) {
 
   function createDialogs() {
     DOM.$listDialog.dialog({
-      // modal: true,
-      autoOpen: false
+      modal: true,
+      autoOpen: false,
+      show: {
+        effect: 'bounce',
+        duration: 'slow'
+      }
     });
   }
 
@@ -151,6 +155,8 @@ const jtrello = (function($) {
       cancel: ".add-new"
     });
   }
+
+ 
 
   // Metod för att rita ut element i DOM:en
   function render() {}

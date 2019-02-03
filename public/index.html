@@ -1,82 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>jQuery UI - Trello Clone (yay!)</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="board">
-        <div class="column">
-            <div class="list">
-                <div class="list-header">
-                    Todo
-                    <button class="button delete">X</button>
-                </div>
-                <ul class="list-cards">
-                    <li class="card">
-                        Card #1
-                        <button class="button delete">X</button>
-                    </li>
-                    <li class="add-new">
-                        <form class="new-card" action="index.html">
-                            <input type="text" name="title" placeholder="Please name the card" />
-                            <button class="button add">Add new card</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
+      <div class="column">
+        <div class="list">
+          <div class="list-header">
+            Todo <button class="button delete">X</button>
+          </div>
+          <ul class="list-cards">
+            <li class="card">
+              Card #1 <button class="button delete">X</button>
+            </li>
+            <li class="add-new">
+              <form class="new-card" action="index.html">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Please name the card"
+                />
+                <button class="button add">Add new card</button>
+              </form>
+            </li>
+          </ul>
         </div>
-        <div class="column">
-            <div class="list">
-                <div class="list-header">
-                    Doing
-                    <button class="button delete">X</button>
-                </div>
-                <ul class="list-cards">
-                    <li class="card">
-                        Card #2
-                        <button class="button delete">X</button>
-                    </li>
-                    <li class="add-new">
-                        <form class="new-card" action="index.html">
-                            <input type="text" name="title" placeholder="Please name the card" />
-                            <button class="button add">Add new card</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
+      </div>
+      <div class="column">
+        <div class="list">
+          <div class="list-header">
+            Doing <button class="button delete">X</button>
+          </div>
+          <ul class="list-cards">
+            <li class="card">
+              Card #2 <button class="button delete">X</button>
+            </li>
+            <li class="add-new">
+              <form class="new-card" action="index.html">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Please name the card"
+                />
+                <button class="button add">Add new card</button>
+              </form>
+            </li>
+          </ul>
         </div>
-        <div class="column">
-            <div class="list">
-                <div class="list-header">
-                    Done
-                    <button class="button delete">X</button>
-                </div>
-                <ul class="list-cards">
-                    <li class="card">
-                        Card #3
-                        <button class="button delete">X</button>
-                    </li>
-                    <li class="add-new">
-                        <form class="new-card" action="index.html">
-                            <input type="text" name="title" placeholder="Please name the card" />
-                            <button class="button add">Add new card</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
+      </div>
+      <div class="column">
+        <div class="list">
+          <div class="list-header">
+            Done <button class="button delete">X</button>
+          </div>
+          <ul class="list-cards">
+            <li class="card">
+              Card #3 <button class="button delete">X</button>
+            </li>
+            <li class="add-new">
+              <form class="new-card" action="index.html">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Please name the card"
+                />
+                <button class="button add">Add new card</button>
+              </form>
+            </li>
+          </ul>
         </div>
-        <div class="column-unsortable"">
-            <button id="new-list" class="button">Add new list</button>
-        </div>
+      </div>
+      <div class="column-unsortable">
+        <button id="new-list" class="button">Add new list</button>
+      </div>
     </div>
 
     <div id="list-creation-dialog" title="Create new list" style="height: 40px">
-        <form> 
+      <form id="tabs">
+        <ul>
+          <li><a href="#tabs-1">Task Name</a></li>
+          <li><a href="#tabs-2">Date</a></li>
+        </ul>
+        <div id="tabs-1">
             <input type="text" name="title" placeholder="List title" />
-        </form>
+            <button type="submit" class=" button">Save</button>
+        </div>
+        <div id="tabs-2">
+          <p>
+            <p>Date: <input type="text" id="datepicker"></p>
+            <button type="submit" class=" button">Save</button>
+          </p>
+        </div>
+    </form>
     </div>
-<script type="text/javascript" src="./bundle.js"></script></body>
+  <script type="text/javascript" src="./bundle.js"></script></body>
 </html>

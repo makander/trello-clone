@@ -108,9 +108,12 @@ const jtrello = (function($) {
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> 
     `);
     toggleListCreationDialog("close");
+    captureDOMEls();
+    moveCard();
+    moveColumns();
   }
 
   function deleteList() {
@@ -128,6 +131,7 @@ const jtrello = (function($) {
     });
   }
 
+
   /* =========== Metoder för att hantera kort i listor nedan =========== */
   function createCard(event) {
     event.preventDefault();
@@ -139,7 +143,6 @@ const jtrello = (function($) {
     $(this).closest(".add-new").before(`<li class="card"> 
     ${newCardTitle} <button class="button delete">X</button>
   </li>`);
-    moveCard();
     $(".delete").click(deleteCard);
   }
 
@@ -170,12 +173,9 @@ const jtrello = (function($) {
 
   function Plugin(element, options) {
   	this.element = element;
-    
-    this.options = $.extend({}, defaults, options);
-    
+    this.options = $.extend({}, defaults, options); 
     this._default = defaults;
     this._name = pluginName;
-    
     this.init(); 
   }
   
